@@ -1,7 +1,19 @@
 @startuml
 start
+fork
 :mkserver;
-:mkserver;
-:asfd;
+fork again
+:mkclient;
+end fork
+:connect;
+fork
+:say hello;
+:receive hi;
+:print hi;
+fork again
+:say hello;
+:receive hi;
+:print hi;
+end fork
 end
 @enduml
