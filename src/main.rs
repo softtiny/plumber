@@ -10,6 +10,8 @@ use tokio_tungstenite::tungstenite::{
 use tokio_tungstenite::{connect_async,};
 use tokio::net::{TcpListener, TcpStream};
 use futures_channel::mpsc::{unbounded, UnboundedSender, UnboundedReceiver};
+use serde_json::{Result as SResult,value,Value as SValue};
+use serde::Deserialize;
 
 
 
@@ -23,6 +25,30 @@ fn factorial(n: u32) -> u32 { if dbg!(n <= 1) { dbg!(1) } else { dbg!(n * factor
 #[test]
 fn test_dbg(){
     dbg!(factorial(5));
+}
+
+#[derive(Deserialize, Debug)]
+struct User {
+    name: String,
+}
+
+#[test]
+fn serde_value_a(){
+     let data = r#"
+        {
+            "name": "John Doe",
+            "age": 43,
+            "phones": [
+                "+44 1234567",
+                "+44 2345678"
+            ]
+        }"#;
+     
+    let res: User = serde_json::from_str(data).unwrap();
+    let res: SValue = serde_json::from_str(data).unwrap();
+    println!("{:#?}",res);
+    println!("res[\"name\"] is {}",res["name"]);
+    println!(r#"res["name"] is {}"#,res["name"]);
 }
 
 async fn handle_connection(raw_stream: TcpStream, addr: SocketAddr) {
