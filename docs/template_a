@@ -1,0 +1,7 @@
+@startuml
+start
+:mk_template_folder;
+:mk_template_cont;
+:sync_to_line;
+end
+@enduml
