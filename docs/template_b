@@ -1,0 +1,22 @@
+@startmindmap
++ cargo-generate
+++ Introduction
++++ cargo, make me a project
+++ Installation
++++ cargo install cargo-generate --features vendored-openssl
+++ Usage
++++ cargo generate username-on-github/mytemplate
+++ Favorites
+-- Templates
+--- Placeholders
+--- Additional liquid filters
+--- Builtin placeholders
+---- {{authors}}
+---- {{project-name}}
+--- Template defined placeholders
+--- Ignoring files
+--- Include / Exclude
+--- Conditional template settings
+--- Hook types
+--- Template Authoring
+@endmindmap
