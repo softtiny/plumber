@@ -1,0 +1,8 @@
+@startuml
+start
+:git pull;
+:open project;
+:select plantuml code;
+:Alt+N;
+end
+@enduml
