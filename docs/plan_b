@@ -1,0 +1,7 @@
+@startuml
+Client -> Server : connect
+Client -> Server : say hi
+Client -> Server : throw err
+Client -> Server : reconnect
+Client -> Server : say hi
+@enduml
