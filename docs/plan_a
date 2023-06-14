@@ -1,0 +1,14 @@
+@startuml
+class Server {
+	link_client_a,
+	link_client_b
+}
+class Client_a{
+	println(hi,A)
+}
+class Client_b{
+	println(hi,B)
+}
+Server --> Client_a : hi,A
+Server --> Client_b : hi,B
+@enduml
