@@ -1,0 +1,15 @@
+@startmindmap
++  Collect struct
+-- server
+--- url
+--- stdout
+--- sendall
+--- sendone
+--- cache
+++ clients []
++++ clinet
+++++ name
+++++ id
+++++ close
+++++ pause
+@endmindmap
