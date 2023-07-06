@@ -1,0 +1,40 @@
+running 1 test
+test plan a run:
+00000000000000000000000000
+clientb end
+"s0001"
+Ok(Text("client_a:hello"))
+"s0002"
+"s0001"
+Ok(Close(Some(CloseFrame { code: Away, reason: "close" })))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+"s0002"
+"s0001"
+Ok(Text("-----"))
+
