@@ -1,0 +1,42 @@
+@startuml
+
+rectangle WebStream {
+	usecase "connect_async" as Connect
+	json url {
+	   "URL":"ws://test.321tips.com/dws/ddPosClient"
+	}
+}
+json Ping {
+	"message":"heart",
+	"serviceId":"1005",
+	"requestId":"10000_1586-3333"
+}
+note top of Ping
+  Every 3s send Ping to Server
+end note
+json Sign {
+	"message":"sign",
+	"serviceId":"1001",
+	"requestId":"10000_1586-3333"
+}
+json Signok {
+	"message":"{\"result\":{\"code\":\"0000\",\"msg\":\"成功\",\"st\":\"2023-07-06 13:45:45\",\"status\":1}}",
+	"requestId":"10000_1586-3333",
+	"serviceId":"1001"
+}
+component Server as Server {
+	
+}
+
+
+Signok --> WebStream : 6. response
+Server -u-> Signok : 5. send
+Sign --> Server: 4. to
+Ping --> Server: 8. to
+WebStream -d-> Sign : 3. send
+WebStream -u-> Ping : 7. send
+Connect <--> Server : 2. connect
+url --> Connect : 1.
+
+
+@enduml
