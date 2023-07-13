@@ -1,0 +1,15 @@
+@startuml
+rectangle WebStream {
+	usecase "accept_async" as Accept
+	usecase "connect_async" as Connect
+	json local {
+	   "URL":"ws://localhost/dws/ddPosClient"
+	}
+	json url {
+	   "URL":"ws://test.321tips.com/dws/ddPosClient"
+	}
+}
+Accept -> local
+local -> url
+url -> Connect
+@enduml
