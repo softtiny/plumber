@@ -6,7 +6,7 @@ rectangle WebStream {
 	   "URL":"ws://localhost/dws/ddPosClient"
 	}
 	json url {
-	   "URL":"ws://test.321tips.com/dws/ddPosClient"
+	   "URL":"ws://HOST-TEST-WS/dws/ddPosClient"
 	}
 }
 Accept -> local

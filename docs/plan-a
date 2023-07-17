@@ -3,7 +3,7 @@
 rectangle WebStream {
 	usecase "connect_async" as Connect
 	json url {
-	   "URL":"ws://test.321tips.com/dws/ddPosClient"
+	   "URL":"ws://HOST-TEST-WS/dws/ddPosClient"
 	}
 }
 json Ping {
