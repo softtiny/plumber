@@ -17,6 +17,43 @@ use serde_json::{Result as SResult,value,Value as SValue,json};
 use serde::Deserialize;
 use dotenv::{dotenv,from_filename};
 
+fn catch_req(data:Option<Result<Message,WsError>> )->SValue {
+    let mut end = json!(null);
+    let data:Result<Message,WsError> = match data {
+        None => return end,
+        Some(f) => f,
+    };
+    let data = match data {
+        Err(e) => return end,
+        Ok(f) => f,
+    };
+    let data:&str = match data.to_text(){
+        Ok(p) => p,
+        Err(e) => return end,
+    };
+    let mut body:SValue =match serde_json::from_str(data){
+        Ok(p) => p,
+        Err(e) => return end,
+    };
+    let path:&SValue = match body.pointer_mut("/path"){
+        None => return end,
+        Some(p)=> p,
+    };
+    end = json!({});
+    let message:&SValue = match body.pointer_mut("/message"){
+        None => return end,
+        Some(p)=> p,
+    };
+    let message = message.clone();
+    let message:&str = match message.as_str(){
+        None => return end,
+        Some(p) => p,
+    };
+    match serde_json::from_str(message){
+        Ok(p) => p,
+        Err(e) => return end,
+    }
+}
 fn catch_err(data:Option<Result<Message,WsError>> )->SValue {
     let end = json!(null);
     let data:Result<Message,WsError> = match data {
@@ -29,7 +66,7 @@ fn catch_err(data:Option<Result<Message,WsError>> )->SValue {
             Ok(p) => p,
             Err(e) => return end,
         };
-        //println!("{:?}",data);
+        println!("catch err ok:::::{:?}",data);
         let mut body:SValue =match serde_json::from_str(data){
             Ok(p) => p,
             Err(e) => return end,
@@ -173,6 +210,32 @@ async fn test_plan_a(){
         };
 
     }
+    let ping_data = r#"{
+        "message":"heart",
+        "serviceId":"1005",
+        "requestId":"10009_1586-test0001"
+    }"#;
+    let ping_data = ping_data.to_string();
+    let (mut write,mut read) = ws_stream.split();
+    loop {
+        tokio::select!{
+            data = async {
+                read.next().await
+            } =>{
+                let res = catch_req(data);
+                println!("{:?}",res);
+
+            }
+            _ = async {
+                time::sleep(time::Duration::from_secs(4)).await;
+                write.send(Message::Text(ping_data.clone())).await;
+                // Help the rust type inferencer out
+                // Ok::<_, io::Error>(())
+            } => {
+                println!("after 4s and send msg");
+            }
+        };
+    } 
     //let data = data.unwrap();
     //let data = data.unwrap();
     //let data = data.to_string();
