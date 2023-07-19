@@ -294,3 +294,19 @@ fn test_match_return(){
     println!("3 is {:?}",opfn(3));
     println!("332 is {:?}",opfn(332));
 }
+
+
+
+#[tokio::test]
+async fn test_select_a() {
+    while true {
+        tokio::select!{
+            _ = time::sleep(time::Duration::from_secs(4)) => {
+                println!("only show 4");
+            }
+            _ = time::sleep(time::Duration::from_secs(5)) => {
+                println!("never show 5");
+            }
+        };
+    }
+}
