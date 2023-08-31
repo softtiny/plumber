@@ -1,0 +1,9 @@
+[package]
+name = "sdk-a"
+version = "0.1.0"
+edition = "2021"
+description = "SurrealDB SDK"
+authors = [ "Kunkka" ]
+
+[dependencies]
+surrealdb = "1.0.0-beta.9"
