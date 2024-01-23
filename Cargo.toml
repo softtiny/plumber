@@ -13,6 +13,7 @@ futures-channel = "0.3.28"
 url = "2.3.1"
 serde_json = "*"
 dotenv = "0.15.0"
+chrono = "0.4.32"
 
 [dependencies.serde]
 version = "^1.0.163"
